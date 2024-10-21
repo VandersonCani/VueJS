@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso VueJS - diretiva v-bind,atribuindo valor em class e style</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+
+<body>
+  <div id="app">
+    <h1>
+      {{ titulo}}
+    </h1>
+    <button class="btn" v-bind:class="btnClassLimpar" v-bind:style="btnStyleLimpar">Limpar</button>
+    <button class="btn" v-bind:class="btnClassEnviar" v-bind:style="btnStyleEnviar">Enviar</button>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          titulo: 'Vue JS',
+
+          btnClassLimpar: {
+            'btn-danger': true,
+            'btn-sm': false
+          },
+          btnClassEnviar: [
+            'btn-primary',
+            {
+              'btn-lg': true
+            }
+          ],
+          btnStyleLimpar: 'margin: 5px; font-size: 50px',
+          btnStyleEnviar: [{
+              'font-size': '30px'
+            },
+            {
+              'text-transform': 'lowercase'
+            }
+          ]
+        }
+      }
+    });
+    app.mount('#app');
+  </script>
+</body>
+
+</html>
