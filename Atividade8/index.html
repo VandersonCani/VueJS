@@ -4,19 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exemplo form 02 com prevenção de comportamento</title>
+  <title>Vue Lifecycle Example</title>
 </head>
 
 <body>
   <div id="app">
-    <p>
-      Mensagematual: {{ message }}
-    </p>
-    <input v-model="message">
-    <p>
-      Atatus:{{status}}
-    </p>
-   
+    <h1>{{ message }}</h1>
+    <button @click = "changeMessage">Change Message</button>
+    <button @click="unmountComponent">Unmount Component</button>
   </div>
 </body>
 
@@ -25,17 +20,43 @@
   const app = Vue.createApp({
     data() {
       return {
-        message: 'Hello Vue.js!',
-        status: 'Esperando...'
+        message: 'Hello Vue.js!'
       };
     },
-    watch: {
-      message(newValue, oldValue) {
-         this.status = `Mensagem mudou de '${oldValue}' para '${newValue}'`;
+    methods: {
+      changeMessage() {
+         this.message = 'Message Updated';
+         },
+         unmountComponent(){
+          app.unmount();
          }
+      },
+      beforeCreate(){
+        console.log('beforeCreate: Dados ainda não estão disponíveis')
+      },
+      created() {
+        console.log('created: Dados já foram inicializados');
+      },
+      beforeMount() {
+        console.log('beforeMount: Componente preste a ser montado no DOM');
+      },
+      mounted() {
+        console.log('mounted: Componente montado no DOM')
+      },
+      beforeUpdate(){
+        console.log('beforeUpdate: Dados foram alterados, prestes a atualizar DOM');
+      },
+      updated() {
+        console.log('updated: DOM foi atualizado');
+      },
+      beforeUnmount(){
+        console.log('beforeUnmounted: Componente prestes a ser destruído');
+      },
+      unmounted() {
+        console.log('unmounted: Componente foi destruído');
       }
   });
-  app.mount('#app')
+ app.mount('#app');
 </script>
 
 </html>
