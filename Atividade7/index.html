@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplo form 02 com prevenção de comportamento</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>
+      {{ capitalize(usuario.nome) }}
+    </h1>
+    <p>
+      {{ truncate(usuario.bio, 30) }}
+    </p>
+  </div>
+</body>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        usuario: {
+          nome: 'Vue JS',
+          bio: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate ullam error explicabo suscipit dicta cum at mollitia enim, aliquam quasi est natus quos temporibus accusamus deserunt iste unde aspernatur! Recusandae excepturi omnis sint debitis voluptatem!'
+        }
+      }
+    },
+    methods: {
+      capitalize(valor) {
+        if (!valor) return '';
+        valor = valor.toString();
+        return valor.charAt(0).toUpperCase() + valor.slice(1);
+      },
+      truncate(valor, limite) {
+        if (!valor) return '';
+        valor = valor.toString();
+        return valor.length > limite ? valor.substring(0, limite) + '...' : valor;
+      }
+    }
+  });
+  app.mount('#app');
+</script>
+
+</html>

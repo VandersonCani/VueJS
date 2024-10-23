@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exemplo form 02 com prevenção de comportamento</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <form @submit.prevent="enviarFormulario">
+      <input type="text" v-model="nome">
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</body>
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        nome: ''
+      };
+    },
+    methods: {
+      enviarFormulario() {
+        console.log('formulario enviado com o nome: ' + this.nome);
+      }
+    }
+
+  });
+  app.mount('#app');
+</script>
+
+</html>
